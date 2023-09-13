@@ -19,7 +19,7 @@ scheduleRouter.post(
   "",
   verifyToken,
   validateBody(scheduleCreateSchema),
-  // realEstateIdExists,
+  realEstateIdExists,
   verifyUserSchedule,
   verifyRealEstate,
   verifyHours,

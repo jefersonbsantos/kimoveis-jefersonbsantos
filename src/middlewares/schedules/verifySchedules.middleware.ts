@@ -10,7 +10,7 @@ export const realEstateIdExists = async (
 ): Promise<void> => {
   let id = req.params.id;
 
-  if (!id) req.body.realEstateId;
+  if (!id) id = req.body.realEstateId;
 
   const foundId: RealEstate | null = await realEstateRepo.findOneBy({
     id: Number(id),
