@@ -8,11 +8,15 @@ import verifyUserPermission from "../middlewares/verifyPermission.middleware";
 
 export const scheduleRouter: Router = Router();
 
-scheduleRouter.post("", verifyToken, scheduleControllers.create);
+scheduleRouter.post(
+  "",
+  verifyToken,
+  validateBody(scheduleCreateSchema),
+  scheduleControllers.create
+);
 
 scheduleRouter.get(
   "/realEstate/:id",
-  validateBody(scheduleCreateSchema),
   verifyToken,
   isAdmin,
   verifyUserPermission,

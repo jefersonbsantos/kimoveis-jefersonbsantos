@@ -1,16 +1,31 @@
 import { Schedule } from "../entities";
 import { ScheduleCreate } from "../interfaces/schedule.interface";
-import { scheduleRepo } from "../repositories";
+import { realEstateRepo, scheduleRepo, userRepo } from "../repositories";
 
-const create = async (payload: ScheduleCreate): Promise<Schedule> => {
-  const schedule: Schedule = scheduleRepo.create(payload);
-  await scheduleRepo.save(schedule);
+const create = async (
+  payload: ScheduleCreate,
+  userId: number
+): Promise<Schedule> => {
+  const realEstate = await realEstateRepo.findOneBy({
+    id: payload.realStateId,
+  });
 
-  return schedule;
+  const user = await userRepo.findOneBy({ id: userId });
+
+  const result = await scheduleRepo.save({
+    ...payload,
+    realEstate: realEstate!,
+    user: user!,
+  });
+
+  return result;
 };
 
-const read = async (): Promise<Schedule[]> => {
-  const awaitRepo = await scheduleRepo.find();
+const read = async (id: number): Promise<any> => {
+  const awaitRepo = await realEstateRepo.findOne({
+    where: { id: id },
+    relations: { address: true, category: true, schedules: { user: true } },
+  });
   return awaitRepo;
 };
 

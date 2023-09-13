@@ -19,10 +19,10 @@ class Schedule {
   @Column()
   userId: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (u) => u.schedules)
   user: User;
 
-  @ManyToOne(() => RealEstate)
+  @ManyToOne(() => RealEstate, (r) => r.schedules)
   realState: RealEstate;
 }
 
