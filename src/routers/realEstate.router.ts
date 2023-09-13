@@ -11,10 +11,10 @@ export const realEstateRouter: Router = Router();
 
 realEstateRouter.post(
   "",
-  validateBody(realEstateCreateSchema),
   verifyToken,
-  isAdmin,
   verifyUserPermission,
+  isAdmin,
+  validateBody(realEstateCreateSchema),
   verifyRealEstateAddressExists,
   realEstateControllers.create
 );

@@ -1,16 +1,30 @@
 import { RealEstate } from "../entities";
 import { RealEstateCreate } from "../interfaces/realEstate.interface";
-import { realEstateRepo } from "../repositories";
+import { addressRepo, categoryRepo, realEstateRepo } from "../repositories";
 
-const create = async (payload: RealEstateCreate): Promise<RealEstate> => {
-  const realEstate: RealEstate = realEstateRepo.create(payload);
-  await realEstateRepo.save(realEstate);
+const create = async (payload: RealEstateCreate): Promise<void> => {
+  const categories = await categoryRepo.findOneBy({ id: payload.categoryId });
 
-  return realEstate;
+  const addresses = await addressRepo.save(payload.address);
+
+  const { id } = await realEstateRepo.save({
+    ...payload,
+    address: addresses,
+    category: categories!,
+  });
+
+  await realEstateRepo.findOne({
+    where: { id: id },
+    relations: { category: true, address: true },
+  });
 };
 
 const read = async (): Promise<RealEstate[]> => {
-  const awaitRepo = await realEstateRepo.find();
+  const awaitRepo: RealEstate[] = await realEstateRepo.find({
+    relations: {
+      address: true,
+    },
+  });
   return awaitRepo;
 };
 
