@@ -3,7 +3,7 @@ import { z } from "zod";
 const realEstateSchema = z.object({
   id: z.number().positive(),
   value: z.string().or(z.number()).default(0),
-  size: z.number(),
+  size: z.number().positive().int(),
   address: z.object({
     street: z.string().max(45),
     zipCode: z.string().max(8),
@@ -19,9 +19,9 @@ const realEstateSchema = z.object({
 
 const realEstateCreateSchema = realEstateSchema.omit({
   id: true,
+  sold: true,
   createdAt: true,
   updatedAt: true,
-  sold: true,
 });
 
 export { realEstateSchema, realEstateCreateSchema };

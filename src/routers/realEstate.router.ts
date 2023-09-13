@@ -5,7 +5,7 @@ import { validateBody } from "../middlewares/validateBody.middleware";
 import { verifyToken } from "../middlewares/verifyToken.middleware";
 import { isAdmin } from "../middlewares/isAdmin.middleware";
 import verifyUserPermission from "../middlewares/verifyPermission.middleware";
-import verifyRealEstateAddressExists from "../middlewares/realEstateAdressExists.middleware";
+import verifyAddressNameExists from "../middlewares/addressExists.middleware";
 
 export const realEstateRouter: Router = Router();
 
@@ -15,7 +15,7 @@ realEstateRouter.post(
   verifyUserPermission,
   isAdmin,
   validateBody(realEstateCreateSchema),
-  verifyRealEstateAddressExists,
+  verifyAddressNameExists,
   realEstateControllers.create
 );
 realEstateRouter.get("", realEstateControllers.read);

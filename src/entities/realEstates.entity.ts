@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -23,7 +24,7 @@ class RealEstate {
   @Column({ type: "decimal", default: 0, precision: 12, scale: 2 })
   value: string | number;
 
-  @Column({})
+  @Column()
   size: number;
 
   @CreateDateColumn({ type: "date" })
@@ -32,19 +33,14 @@ class RealEstate {
   @UpdateDateColumn({ type: "date" })
   updatedAt: string;
 
-  @Column({ unique: true })
-  addressId: number;
-
-  @Column()
-  categoryId: number;
-
   @OneToMany(() => Schedule, (s) => s.realState)
   schedules: Array<Schedule>;
 
-  @ManyToOne(() => Category)
+  @ManyToOne(() => Category, (c) => c.realState)
   category: Category;
 
-  @OneToOne(() => Address, (a) => a.address)
+  @OneToOne(() => Address, (a) => a.realEstate)
+  @JoinColumn()
   address: Address;
 }
 

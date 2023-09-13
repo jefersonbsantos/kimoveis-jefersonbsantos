@@ -2,7 +2,7 @@ import { RealEstate } from "../entities";
 import { RealEstateCreate } from "../interfaces/realEstate.interface";
 import { addressRepo, categoryRepo, realEstateRepo } from "../repositories";
 
-const create = async (payload: RealEstateCreate): Promise<void> => {
+const create = async (payload: RealEstateCreate): Promise<RealEstate> => {
   const categories = await categoryRepo.findOneBy({ id: payload.categoryId });
 
   const addresses = await addressRepo.save(payload.address);
@@ -13,10 +13,12 @@ const create = async (payload: RealEstateCreate): Promise<void> => {
     category: categories!,
   });
 
-  await realEstateRepo.findOne({
+  const realEstates = await realEstateRepo.findOne({
     where: { id: id },
     relations: { category: true, address: true },
   });
+
+  return realEstates!;
 };
 
 const read = async (): Promise<RealEstate[]> => {
