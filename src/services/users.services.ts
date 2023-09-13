@@ -1,15 +1,10 @@
 import { userRepo } from "../repositories";
 import {
   UserCreate,
-  UserRead,
   UserReturn,
   UserUpdate,
 } from "../interfaces/user.interface";
-import {
-  userCreateSchema,
-  userReadSchema,
-  userReturnSchema,
-} from "../schemas/user.schema";
+import { userReadSchema, userReturnSchema } from "../schemas/user.schema";
 import { User } from "../entities";
 
 const create = async (payload: UserCreate): Promise<UserReturn> => {

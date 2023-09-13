@@ -8,8 +8,6 @@ const scheduleSchema = z.object({
   hour: z.string(),
   realStateId: z.number(),
   userId: z.number(),
-  user: userSchema,
-  realEstate: realEstateSchema,
 });
 
 const scheduleCreateSchema = scheduleSchema.omit({

@@ -12,9 +12,9 @@ const realEstateSchema = z.object({
   updatedAt: z.string(),
   addressId: z.number(),
   categoryId: z.number(),
-  schedules: scheduleSchema,
-  category: categorySchema,
-  address: addressSchema,
+  // schedules: scheduleSchema,
+  // category: categorySchema,
+  // address: addressSchema,
 });
 
 const realEstateCreateSchema = realEstateSchema.omit({

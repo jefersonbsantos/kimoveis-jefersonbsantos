@@ -16,7 +16,6 @@ const verifyEmailExists = async (
 
   if (foundUser) throw new AppError("Email already exists", 409);
 
-  // res.locals.foundUser = foundUser;
   return next();
 };
 
