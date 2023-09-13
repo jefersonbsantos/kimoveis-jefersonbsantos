@@ -4,7 +4,7 @@ const scheduleSchema = z.object({
   id: z.number().positive(),
   date: z.string(),
   hour: z.string(),
-  realStateId: z.number().positive().int(),
+  realEstateId: z.number().positive().int(),
   userId: z.string(),
 });
 

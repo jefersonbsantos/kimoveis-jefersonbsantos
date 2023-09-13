@@ -4,7 +4,7 @@ import schedulesServices from "../services/schedules.services";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
   const { sub } = res.locals.decoded;
-  const schedule: Schedule = await schedulesServices.create(req.body, sub);
+  const schedule = await schedulesServices.create(req.body, sub);
 
   return res.status(201).json({ message: "Schedule created" });
 };

@@ -5,20 +5,18 @@ import { realEstateRepo, scheduleRepo, userRepo } from "../repositories";
 const create = async (
   payload: ScheduleCreate,
   userId: number
-): Promise<Schedule> => {
+): Promise<void> => {
   const realEstate = await realEstateRepo.findOneBy({
-    id: payload.realStateId,
+    id: payload.realEstateId,
   });
 
   const user = await userRepo.findOneBy({ id: userId });
 
-  const result = await scheduleRepo.save({
+  await scheduleRepo.save({
     ...payload,
     realEstate: realEstate!,
     user: user!,
   });
-
-  return result;
 };
 
 const read = async (id: number): Promise<any> => {
