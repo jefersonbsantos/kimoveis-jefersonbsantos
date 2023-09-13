@@ -5,7 +5,10 @@ import { validateBody } from "../middlewares/validateBody.middleware";
 import { verifyToken } from "../middlewares/verifyToken.middleware";
 import { isAdmin } from "../middlewares/isAdmin.middleware";
 import verifyUserPermission from "../middlewares/verifyPermission.middleware";
-import { realEstateIdExists } from "../middlewares/schedules/verifySchedules.middleware";
+import {
+  realEstateIdExists,
+  verifyUserSchedule,
+} from "../middlewares/schedules/verifySchedules.middleware";
 
 export const scheduleRouter: Router = Router();
 
@@ -13,7 +16,8 @@ scheduleRouter.post(
   "",
   verifyToken,
   validateBody(scheduleCreateSchema),
-  realEstateIdExists,
+  // realEstateIdExists,
+  verifyUserSchedule,
   scheduleControllers.create
 );
 

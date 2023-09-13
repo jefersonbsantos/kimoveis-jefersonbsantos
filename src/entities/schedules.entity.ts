@@ -13,17 +13,11 @@ class Schedule {
   @Column({ type: "time" })
   hour: string;
 
-  @Column()
-  realStateId: number;
-
-  @Column()
-  userId: number;
-
   @ManyToOne(() => User, (u) => u.schedules)
   user: User;
 
   @ManyToOne(() => RealEstate, (r) => r.schedules)
-  realState: RealEstate;
+  realEstate: RealEstate;
 }
 
 export default Schedule;

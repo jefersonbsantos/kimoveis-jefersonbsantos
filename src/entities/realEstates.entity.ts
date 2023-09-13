@@ -33,10 +33,10 @@ class RealEstate {
   @UpdateDateColumn({ type: "date" })
   updatedAt: string;
 
-  @OneToMany(() => Schedule, (s) => s.realState)
+  @OneToMany(() => Schedule, (s) => s.realEstate)
   schedules: Array<Schedule>;
 
-  @ManyToOne(() => Category, (c) => c.realState)
+  @ManyToOne(() => Category, (c) => c.realEstate)
   category: Category;
 
   @OneToOne(() => Address, (a) => a.realEstate)
