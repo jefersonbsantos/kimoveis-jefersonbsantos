@@ -1,4 +1,5 @@
 import { Category } from "../entities";
+import { AppError } from "../errors/App.error";
 import { CategoryCreate } from "../interfaces/category.interface";
 import { categoryRepo } from "../repositories";
 
@@ -14,4 +15,15 @@ const read = async (): Promise<Category[]> => {
   return awaitRepo;
 };
 
-export default { create, read };
+const readById = async (id: number): Promise<Category> => {
+  const category = await categoryRepo.findOne({
+    where: { id: id },
+    relations: { realEstate: true },
+  });
+
+  if (!category) throw new AppError("Category not found", 404);
+
+  return category;
+};
+
+export default { create, read, readById };

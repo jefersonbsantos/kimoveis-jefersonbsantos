@@ -20,4 +20,4 @@ categoryRouter.post(
 );
 
 categoryRouter.get("", categoryController.read);
-categoryRouter.get("/:id/realEstate", categoryController.read);
+categoryRouter.get("/:id/realEstate", categoryController.readById);

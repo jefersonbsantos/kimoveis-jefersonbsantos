@@ -13,4 +13,9 @@ const read = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(categories);
 };
 
-export default { create, read };
+const readById = async (req: Request, res: Response): Promise<Response> => {
+  const categories = await categoriesServices.readById(Number(req.params.id));
+  return res.status(200).json(categories);
+};
+
+export default { create, read, readById };
