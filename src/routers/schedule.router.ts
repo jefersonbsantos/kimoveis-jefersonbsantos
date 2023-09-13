@@ -7,7 +7,10 @@ import { isAdmin } from "../middlewares/isAdmin.middleware";
 import verifyUserPermission from "../middlewares/verifyPermission.middleware";
 import {
   realEstateIdExists,
+  verifyHours,
+  verifyRealEstate,
   verifyUserSchedule,
+  verifyWeekDay,
 } from "../middlewares/schedules/verifySchedules.middleware";
 
 export const scheduleRouter: Router = Router();
@@ -18,6 +21,9 @@ scheduleRouter.post(
   validateBody(scheduleCreateSchema),
   // realEstateIdExists,
   verifyUserSchedule,
+  verifyRealEstate,
+  verifyHours,
+  verifyWeekDay,
   scheduleControllers.create
 );
 
